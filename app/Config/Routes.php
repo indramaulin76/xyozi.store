@@ -5,11 +5,8 @@ use CodeIgniter\Router\RouteCollection;
 /**
  * @var RouteCollection $routes
  */
+$routes->setAutoRoute(false);
  
- $routes->set404Override(function() {
-     return view('errors/error_404');
- });
-
 $routes->post('callback', 'Callback::callbackSakurupiah');
 
 $routes->group('', ['namespace' => 'App\Controllers\Autentikasi'], function ($routes) {
@@ -139,7 +136,7 @@ $routes->group('admin', ['namespace' => 'App\Controllers\Admin'], function ($rou
 
 });
 
-$routes->group('sistem', ['namespace' => 'App\Controllers\Sistem'], function ($routes) {
+$routes->group('sistem', ['namespace' => 'App\Controllers\Sistem', 'filter' => 'internalKey'], function ($routes) {
     $routes->get('get-produkVip', 'Sistem::getProdukVip');
     $routes->get('update-statusVip', 'Sistem::updateStatusVip');
     $routes->get('get-produkDf', 'Sistem::getProdukDf');
@@ -157,17 +154,12 @@ $routes->group('order', ['namespace' => 'App\Controllers'], function ($routes) {
   
 });
 
-$routes->group('delete', ['namespace' => 'App\Controllers'], function ($routes) {
-  $routes->get('produk', 'Delete::deleteAllProducts');
-  
-});
-
 $routes->get('timezone', 'TimezoneController::index');
 
 $routes->group('api', ['namespace' => 'App\Controllers'], function ($routes) {
-  $routes->add('profile', 'Api::getProfile');
-  $routes->add('service', 'Api::getService');
-  $routes->add('status', 'Api::getStatus');
-  $routes->add('order', 'Api::order');
+  $routes->post('profile', 'Api::getProfile');
+  $routes->post('service', 'Api::getService');
+  $routes->post('status', 'Api::getStatus');
+  $routes->post('order', 'Api::order');
   
 });

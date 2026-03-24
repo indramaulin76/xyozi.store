@@ -8,6 +8,7 @@ use CodeIgniter\Filters\DebugToolbar;
 use CodeIgniter\Filters\Honeypot;
 use CodeIgniter\Filters\InvalidChars;
 use CodeIgniter\Filters\SecureHeaders;
+use App\Filters\InternalKeyFilter;
 use App\Filters\TimezoneFilter;
 
 class Filters extends BaseConfig
@@ -25,6 +26,7 @@ class Filters extends BaseConfig
         'honeypot'      => Honeypot::class,
         'invalidchars'  => InvalidChars::class,
         'secureheaders' => SecureHeaders::class,
+        'internalKey'   => InternalKeyFilter::class,
         'timezone'      => TimezoneFilter::class, // Ditambahkan
     ];
 
@@ -45,7 +47,7 @@ class Filters extends BaseConfig
         'after' => [
             'toolbar',
             // 'honeypot',
-            // 'secureheaders',
+            'secureheaders',
         ],
     ];
 

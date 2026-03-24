@@ -340,3 +340,13 @@ WHERE `brand` IN :brand:', [...], false)
  7 SYSTEMPATH\CodeIgniter.php(362): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
  8 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
  9 SYSTEMPATH\Commands\Server\rewrite.php(47): require_once('C:\\Codingan\\TOPUP-GAMES-PG-SAKURUPIAH+DB\\public\\index.php')
+CRITICAL - 2026-03-24 11:53:16 --> Object of class CodeIgniter\HTTP\Response could not be converted to string
+in SYSTEMPATH\CodeIgniter.php on line 963.
+ 1 SYSTEMPATH\CodeIgniter.php(371): CodeIgniter\CodeIgniter->display404errors(Object(CodeIgniter\Exceptions\PageNotFoundException))
+ 2 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+ 3 SYSTEMPATH\Commands\Server\rewrite.php(47): require_once('C:\\Codingan\\TOPUP-GAMES-PG-SAKURUPIAH+DB\\public\\index.php')
+CRITICAL - 2026-03-24 11:53:17 --> Object of class CodeIgniter\HTTP\Response could not be converted to string
+in SYSTEMPATH\CodeIgniter.php on line 963.
+ 1 SYSTEMPATH\CodeIgniter.php(371): CodeIgniter\CodeIgniter->display404errors(Object(CodeIgniter\Exceptions\PageNotFoundException))
+ 2 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+ 3 SYSTEMPATH\Commands\Server\rewrite.php(47): require_once('C:\\Codingan\\TOPUP-GAMES-PG-SAKURUPIAH+DB\\public\\index.php')
