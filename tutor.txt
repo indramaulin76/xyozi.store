@@ -1,0 +1,25 @@
+Updated BY: Coding Kebumen
+WhatsApp: 083191910986
+Support Donasi: Dana 083191910986 A/N Agus Riyanto
+
+1.INSTALASI
+- Buka file ( .env ) edit sesaikan dengan url dan database kamu
+- login admin
+username: admin123
+password: admin123
+
+
+2.KONFIGURASI CRONSJOB
+/sistem/get-produkVip ( get vip )
+/sistem/update-statusVip
+/sistem/get-produkDf ( get Digi )
+/sistem/update-statusDf
+/sistem/get-produkVcg 
+/sistem/update-statusAg ( update apigames status )
+/sistem/update-refundOrder
+
+3.URL CALLBACK PAYMENT GATEWAY
+domain.com/callback ( callback sakurupiah )
+
+// poin 3 abaikan saja karna sudah otomatis membuat data cronsjob sesuai data server kamu //
+

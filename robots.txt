@@ -1,0 +1,13 @@
+User-agent: *
+Disallow: /admin/dashboard
+Disallow: /admin/produk
+Disallow: /admin/banner
+Disallow: /admin/kategori
+Disallow: /admin/games
+Disallow: /admin/metode-pembayaran
+Disallow: /admin/topup
+Disallow: /admin/pembelian
+Disallow: /admin/api-provider
+Disallow: /admin/website
+Disallow: /admin/kontak
+Disallow: /admin/user
