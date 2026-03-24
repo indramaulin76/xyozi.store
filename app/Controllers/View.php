@@ -77,10 +77,10 @@ class View extends BaseController
                                 ->where('waktu_akhir_fs >', $currentDateTime)
                                 ->findAll();
                              
-        $brandFs = array_column($produkFs, 'brand');
+        $brandFs = array_values(array_unique(array_filter(array_column($produkFs, 'brand'))));
         
         $gamesModel = new GamesModel();
-        $gamesFs = $gamesModel->whereIn('brand', $brandFs)->findAll();
+        $gamesFs = empty($brandFs) ? [] : $gamesModel->whereIn('brand', $brandFs)->findAll();
         
         $data = [
             'produkFs' => $produkFs,

@@ -10,25 +10,25 @@
     <meta name="description" content="<?= $web['web_description'] ?>">
     <meta name="keywords" content="<?= $web['web_keywords'] ?>">
     <meta name="author" content="<?= $web['web_author'] ?>">
-    <link rel="icon" type="image/x-icon" href="<?= base_url(); ?>/public/img/web/<?= $web['web_icon'] ?>">
+    <link rel="icon" type="image/x-icon" href="<?= base_url(); ?>/img/web/<?= $web['web_icon'] ?>">
     
     <!-- NEW CSS -->
-    <link rel="stylesheet" href="<?= base_url('public/css/main.min.css') ?>">
-    <link rel="stylesheet" href="<?= base_url('public/css/sweetalert2.min.css') ?>">
-    <link rel="stylesheet" href="<?= base_url('public/css/toastify.min.css') ?>">
-    <link rel="stylesheet" href="<?= base_url('public/new/assets/css/swiper.min.css') ?>">
+    <link rel="stylesheet" href="<?= base_url('css/main.min.css') ?>">
+    <link rel="stylesheet" href="<?= base_url('css/sweetalert2.min.css') ?>">
+    <link rel="stylesheet" href="<?= base_url('css/toastify.min.css') ?>">
+    <link rel="stylesheet" href="<?= base_url('new/assets/css/swiper.min.css') ?>">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="stylesheet" href="<?= base_url('public/css/datatable.css') ?>">
+    <link rel="stylesheet" href="<?= base_url('css/datatable.css') ?>">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css">
 
     <!-- NEW JS -->
-    <script src="<?= base_url('public/js/swiper-bundle.min.js') ?>"></script>
-    <script src="<?= base_url('public/js/main.min.js') ?>"></script>
-    <script src="<?= base_url('public/js/sweetalert2.all.min.js') ?>"></script>
-    <script src="<?= base_url('public/new/assets/libs/jquery/dist/jquery.min.js') ?>"></script>
+    <script src="<?= base_url('js/swiper-bundle.min.js') ?>"></script>
+    <script src="<?= base_url('js/main.min.js') ?>"></script>
+    <script src="<?= base_url('js/sweetalert2.all.min.js') ?>"></script>
+    <script src="<?= base_url('new/assets/libs/jquery/dist/jquery.min.js') ?>"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
-    <script src="<?= base_url('public/js/jquery.dataTables.min.js') ?>"></script>
+    <script src="<?= base_url('js/jquery.dataTables.min.js') ?>"></script>
     <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
         
     <style>
@@ -99,7 +99,7 @@
         background-color: rgb(52 55 59/var(--tw-bg-opacity));
         --tw-text-opacity: 1;
         color: rgb(255 255 255/var(--tw-text-opacity));
-        background-image: url('public/img/card/bg-title-product.svg');
+        background-image: url('img/card/bg-title-product.svg');
         background-repeat: repeat-x;
         background-position: top;
         background-size: clamp(60em,100rem,100em) auto,cover;
@@ -332,7 +332,7 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
           </svg>
         </button>
         <a href="<?= base_url() ?>" class="flex ml-3 space-x-1 items-center">
-            <img src="<?= base_url('public/img/web/' . $web['web_logo']) ?>" class="h-8" alt="<?= $web['web_title'] ?> - <?= $web['web_description'] ?>" loading="lazy" />
+            <img src="<?= base_url('img/web/' . $web['web_logo']) ?>" class="h-8" alt="<?= $web['web_title'] ?> - <?= $web['web_description'] ?>" loading="lazy" />
         </a>
         <div class="flex ms-auto md:order-2 space-x-2 md:space-x-3">
           <button type="button" data-collapse-toggle="navbar-search" aria-label="search" aria-controls="navbar-search" aria-expanded="false" class="flex items-center justify-center md:hidden text-white  hover:bg-murky-900 focus:outline-none rounded-lg text-sm border border-murky-800 w-10 h-10">
@@ -584,7 +584,7 @@ viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
             <div>
               <div class="mb-6">
                   <a href="<?= base_url() ?>" class="flex items-center">
-                      <img src="<?= base_url('public/img/web/' . $web['web_logo']) ?>" class="h-8 me-3" alt="<?= $web['web_title'] ?> - <?= $web['web_description'] ?>" />
+                      <img src="<?= base_url('img/web/' . $web['web_logo']) ?>" class="h-8 me-3" alt="<?= $web['web_title'] ?> - <?= $web['web_description'] ?>" />
                   </a>
                   <div class="mt-5">
                     <span class="text-sm text-white"><?= $web['web_description'] ?>

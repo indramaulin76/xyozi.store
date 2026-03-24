@@ -507,7 +507,7 @@
             response.forEach(function(banner) {
                 $('#swiper').append(
                     '<div class="swiper-slide">' +
-                    '<img src="<?= base_url('public/img/banner/') ?>' + banner.gambar + '" alt="<?= $web['web_title'] ?>" loading="lazy">' +
+                    '<img src="<?= base_url('img/banner/') ?>' + banner.gambar + '" alt="<?= $web['web_title'] ?>" loading="lazy">' +
                     '</div>'
                 );
             });
@@ -540,7 +540,7 @@ function loadFlashSale() {
                     $('.swiper-wrapper-fs').append(
                         '<div onclick="location.href=\'order/' + gamesFs.slug + '\'" class="swiper-slide swiper-slide-fs bg-murky-800">' +
                         '<div class="ribbon"><span>' + produkFs.persen_diskon + '% OFF</span></div>' +
-                        '<img src="<?= base_url('public/img/games/') ?>' + gamesFs.gambar + '" alt="Gambar" />' +
+                        '<img src="<?= base_url('img/games/') ?>' + gamesFs.gambar + '" alt="Gambar" />' +
                         '<div class="name-fs text-white text-sm font-semibold flex flex-nowrap">' + produkFs.nama + '</div>' +
                         '<div class="subname-fs text-gray-300 text-xs">' + produkFs.brand + '</div>' +
                         '</div>'
@@ -571,7 +571,7 @@ $(document).ready(function() {
             response.forEach(function(game) {
                 $('#popular-cards-container').append(
                     '<div onclick="location.href=\'<?= base_url('order/') ?>' + game.slug + '\'" class="card relative flex flex-col items-center shadow">' +
-                    '<img class="object-cover w-full h-full" src="<?= base_url(); ?>public/img/games/' + game.gambar + '" alt="' + game.nama + '" loading="lazy">' +
+                    '<img class="object-cover w-full h-full" src="<?= base_url(); ?>img/games/' + game.gambar + '" alt="' + game.nama + '" loading="lazy">' +
                     '<div class="overlay absolute bottom-0 w-full px-2 py-1">' +
                     '<p class="text-xs md:text-xl font-bold text-white whitespace-nowrap text-produk">' + game.nama + '</p>' +
                     '<p class="text-xs md:text-sm font-normal text-gray-300 text-produk">' + game.sub_nama + '</p>' +
@@ -602,7 +602,7 @@ $(document).ready(function() {
               response.forEach(function(game) {
                   $('#cards-container').append(
                       '<div onclick="location.href=\'<?= base_url('order/') ?>' + game.slug + '\'" class="card card-tabs relative flex flex-col items-center shadow" data-category="' + game.kategori + '">' +
-                      '<img class="object-cover w-full h-full" src="<?= base_url(); ?>public/img/games/' + game.gambar + '" alt="' + game.nama + '" loading="lazy">' +
+                      '<img class="object-cover w-full h-full" src="<?= base_url(); ?>img/games/' + game.gambar + '" alt="' + game.nama + '" loading="lazy">' +
                       '<div class="overlay absolute bottom-0 w-full px-2 py-1">' +
                       '<p class="text-xs md:text-xl font-bold text-white whitespace-nowrap text-produk">' + game.nama + '</p>' +
                       '<p class="text-xs md:text-sm font-normal text-gray-300 text-produk">' + game.sub_nama + '</p>' +
@@ -659,7 +659,7 @@ $(document).ready(function() {
         response.forEach(function(berita) {
           $('#berita-container').append(
             '<div onclick="location.href=\'<?= base_url('news/') ?>' + berita.slug + '\'" class="items-center bg-murky-800 rounded-lg shadow">' +
-            '<img class="w-full rounded-t-lg" src="<?= base_url(); ?>public/img/berita/' + berita.gambar + '" alt="' + berita.judul + '">' +
+            '<img class="w-full rounded-t-lg" src="<?= base_url(); ?>img/berita/' + berita.gambar + '" alt="' + berita.judul + '">' +
             '<div class="p-5">' +
             '<h3 class="text-xl font-bold tracking-tight text-gray-900 dark:text-white">' +
             berita.judul +
