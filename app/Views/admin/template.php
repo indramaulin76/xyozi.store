@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" class="dark">
 <head>
+  <?php $assetBase = rtrim(str_replace('/index.php', '', base_url()), '/'); ?>
   <meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -8,19 +9,19 @@
 
 	<!-- PAGE TITLE HERE -->
 	<title>Admin</title>
-	<link rel="icon" type="image/x-icon" href="<?= base_url(); ?>/public/img/web/<?= $web['web_icon'] ?>">
+	<link rel="icon" type="image/x-icon" href="<?= $assetBase; ?>/public/img/web/<?= $web['web_icon'] ?>">
 	
 	<!-- CSS -->
-	<link rel="stylesheet" href="<?= base_url('public/css/main.min.css') ?>">
+	<link rel="stylesheet" href="<?= $assetBase; ?>/public/css/main.min.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-	<link rel="stylesheet" href="<?= base_url('public/css/datatable.css') ?>">
+	<link rel="stylesheet" href="<?= $assetBase; ?>/public/css/datatable.css">
 	<link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
 	
 	<!-- JS -->
-	<script src="<?= base_url('public/js/main.min.js') ?>"></script>
-	<script src="<?= base_url('public/new/assets/libs/jquery/dist/jquery.min.js') ?>"></script>
-  <script src="<?= base_url('public/js/jquery.dataTables.min.js') ?>"></script>
-	<script src="<?= base_url('public/admin/vendor/ckeditor/ckeditor.js') ?>"></script>
+	<script src="<?= $assetBase; ?>/public/js/main.min.js"></script>
+	<script src="<?= $assetBase; ?>/public/new/assets/libs/jquery/dist/jquery.min.js"></script>
+  <script src="<?= $assetBase; ?>/public/js/jquery.dataTables.min.js"></script>
+	<script src="<?= $assetBase; ?>/public/admin/vendor/ckeditor/ckeditor.js"></script>
 	<script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
 	
 	<style>
@@ -112,7 +113,7 @@
               </svg>
            </button>
           <a href="<?= base_url('admin/dashboard') ?>" class="flex ms-2 md:me-24">
-            <img src="<?= base_url('public/img/web/' . $web['web_logo']) ?>" class="h-8" alt="Logo" />
+            <img src="<?= $assetBase; ?>/public/img/web/<?= $web['web_logo'] ?>" class="h-8" alt="Logo" />
           </a>
         </div>
         <div class="flex items-center">
