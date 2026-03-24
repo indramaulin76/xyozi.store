@@ -1,5 +1,6 @@
 <?= $this->extend('template') ?>
 <?= $this->section('content') ?>
+<?php $assetBase = rtrim(str_replace('/index.php', '', base_url()), '/'); ?>
 
 <style>
 .top-content {
@@ -78,13 +79,13 @@
 
 <div class="flex flex-col gap-3 w-full max-w-screen-xl">
   <div class="w-full max-w-screen-xl">
-    <img class="object-cover w-full" src="<?= base_url(); ?>public/img/games/<?= $games['banner'] ?>" alt="<?= $games['nama'] ?>" loading="lazy">
+    <img class="object-cover w-full" src="<?= $assetBase; ?>/public/img/games/<?= $games['banner'] ?>" alt="<?= $games['nama'] ?>" loading="lazy">
   </div>
   <div class="flex sm:flex-row flex-col gap-3">
     <div class="flex flex-col gap-3 relative w-full">
       <div class="sticky-content">
         <div class="flex items-center gap-3 bg-murky-800 border-y border-murky-600 top-content shadow-2xl p-4">
-            <img class="object-cover games-img lazy-image" data-src="<?= base_url(); ?>public/img/games/<?= $games['gambar'] ?>" alt="<?= $games['nama'] ?>" loading="lazy">
+            <img class="object-cover games-img lazy-image" data-src="<?= $assetBase; ?>/public/img/games/<?= $games['gambar'] ?>" alt="<?= $games['nama'] ?>" loading="lazy">
             <div class="flex flex-col">
                 <h5 class="text-xl italic font-medium text-gray-900 dark:text-white"><?= $games['nama'] ?></h5>       
                 <p class="text-sm text-gray-300"><?= $games['sub_nama'] ?></p>
@@ -110,7 +111,7 @@
               <span class="text-sm font-normal text-gray-900 dark:text-white"><?= $games['informasi'] ?></h5>
               </div>
               <div class="col px-3 mb-4" style="display: flex; align-items: center;">
-                         <img src="public/img/img2/tes.gif" class="gradient-corona-img img-x" alt="" width="50">
+                         <img src="<?= $assetBase; ?>/public/img/img2/tes.gif" class="gradient-corona-img img-x" alt="" width="50">
                                 <marquee width="100%" direction="left" style="flex-grow: 1;">
                                     <span class="mb-0 font-weight-normal"><strong>Proses Otomatis</strong> |</span>
                                 <span class="font-weight-normal">Open 24 Jam Nonstop |</span>&nbsp;
@@ -176,7 +177,7 @@
                                         </div>
                                         <div class="flex items-center ms-auto">
                                             <?php if (!empty($p['logo'])) : ?>
-                                                <img src="<?= base_url('public/img/produk/' . $p['logo']); ?>" class="mx-auto w-8" alt="Logo Produk">
+                                                <img src="<?= $assetBase; ?>/public/img/produk/<?= $p['logo']; ?>" class="mx-auto w-8" alt="Logo Produk">
                                             <?php endif; ?>
                                         </div>
                                     </div>
@@ -210,7 +211,7 @@
                                         </div>
                                         <div class="flex items-center ms-auto">
                                             <?php if (!empty($p['logo'])) : ?>
-                                                <img src="<?= base_url('public/img/produk/' . $p['logo']); ?>" class="mx-auto w-8" alt="Logo Produk">
+                                                <img src="<?= $assetBase; ?>/public/img/produk/<?= $p['logo']; ?>" class="mx-auto w-8" alt="Logo Produk">
                                             <?php endif; ?>
                                         </div>
                                     </div>
@@ -248,7 +249,7 @@
                     <button id="metodeBtn<?= $m['kode'] ?>" class="relative bg-gray-300 border-2 border-transparent gap-2 flex w-full flex-col rounded-lg p-3">
                         <div class="flex flex-row gap-2 justify-between w-full">
                             <div class="flex items-center space-x-3">
-                                <img src="<?= base_url(); ?>public/img/metode/<?= $m['gambar'] ?>" alt="<?= $m['nama'] ?>" class="flex flex-col w-8 max-h-4" loading="lazy">
+                                <img src="<?= $assetBase; ?>/public/img/metode/<?= $m['gambar'] ?>" alt="<?= $m['nama'] ?>" class="flex flex-col w-8 max-h-4" loading="lazy">
                                 <div class="flex flex-col text-left">
                                   <span class="text-md font-bold text-gray-900"><?= $m['nama'] ?></span>
                                   <span class="text-sm italic text-gray-900">
@@ -290,7 +291,7 @@
                     <?php if ($m['kategori'] == 'ewallet'): ?>
                       <div class="pb-2">
                         <button id="metodeBtn<?= $m['kode'] ?>" class="p-3 relative bg-gray-300 border-2 border-transparent gap-2 flex w-full flex-col rounded-lg">
-                          <img src="<?= base_url(); ?>public/img/metode/<?= $m['gambar'] ?>" alt="<?= $games['nama'] ?>" class="flex flex-col w-16 h-7" loading="lazy">
+                          <img src="<?= $assetBase; ?>/public/img/metode/<?= $m['gambar'] ?>" alt="<?= $games['nama'] ?>" class="flex flex-col w-16 h-7" loading="lazy">
                           <span class="text-sm font-bold text-left line-clamp-2 x-color-g" id="selectedMetodeHarga<?= $m['kode'] ?>"></span>
                           <span class="text-sm text-gray-900 font-normal text-left"><?= nl2br($m['nama']) ?></span>
                             <div id="selectedMetodeIndicator<?= $m['kode'] ?>" class="absolute right-0 bottom-0 px-2 x-bg-g select-check hidden">
@@ -307,7 +308,7 @@
                 <?php foreach ($metode as $m) : ?>
                     <?php if ($m['kategori'] == 'ewallet'): ?>
                     <div class="overflow-hidden overflow-x-scroll">
-                      <img src="<?= base_url(); ?>public/img/metode/<?= $m['gambar'] ?>" alt="<?= $games['nama'] ?>" class="flex flex-col w-10 h-4" loading="lazy">
+                      <img src="<?= $assetBase; ?>/public/img/metode/<?= $m['gambar'] ?>" alt="<?= $games['nama'] ?>" class="flex flex-col w-10 h-4" loading="lazy">
                     </div>
                     <?php endif; ?>
                 <?php endforeach; ?>
@@ -329,7 +330,7 @@
                     <?php if ($m['kategori'] == 'virtual-account'): ?>
                       <div class="pb-2">
                         <button id="metodeBtn<?= $m['kode'] ?>" class="p-3 relative bg-gray-300 border-2 border-transparent gap-2 flex w-full flex-col rounded-lg">
-                          <img src="<?= base_url(); ?>public/img/metode/<?= $m['gambar'] ?>" alt="<?= $games['nama'] ?>" class="flex flex-col w-16 h-7" loading="lazy">
+                          <img src="<?= $assetBase; ?>/public/img/metode/<?= $m['gambar'] ?>" alt="<?= $games['nama'] ?>" class="flex flex-col w-16 h-7" loading="lazy">
                           <span class="text-sm font-bold text-left line-clamp-2 x-color-g" id="selectedMetodeHarga<?= $m['kode'] ?>"></span>
                           <span class="text-sm text-gray-900 font-normal text-left"><?= nl2br($m['nama']) ?></span>
                             <div id="selectedMetodeIndicator<?= $m['kode'] ?>" class="absolute right-0 bottom-0 px-2 x-bg-g select-check hidden">
@@ -347,7 +348,7 @@
                 <?php foreach ($metode as $m) : ?>
                     <?php if ($m['kategori'] == 'virtual-account'): ?>
                     <div class="flex-shrink-0 mr-4">
-                      <img src="<?= base_url(); ?>public/img/metode/<?= $m['gambar'] ?>" alt="<?= $games['nama'] ?>" class="mr-2 w-10 h-4" loading="lazy">
+                      <img src="<?= $assetBase; ?>/public/img/metode/<?= $m['gambar'] ?>" alt="<?= $games['nama'] ?>" class="mr-2 w-10 h-4" loading="lazy">
                     </div>
                     <?php endif; ?>
                 <?php endforeach; ?>
@@ -370,7 +371,7 @@
                     <?php if ($m['kategori'] == 'retail'): ?>
                       <div class="pb-2">
                         <button id="metodeBtn<?= $m['kode'] ?>" class="p-3 relative bg-gray-300 border-2 border-transparent gap-2 flex w-full flex-col rounded-lg">
-                          <img src="<?= base_url(); ?>public/img/metode/<?= $m['gambar'] ?>" alt="<?= $games['nama'] ?>" class="flex flex-col w-16 h-7" loading="lazy">
+                          <img src="<?= $assetBase; ?>/public/img/metode/<?= $m['gambar'] ?>" alt="<?= $games['nama'] ?>" class="flex flex-col w-16 h-7" loading="lazy">
                           <span class="text-sm font-bold text-left line-clamp-2 x-color-g" id="selectedMetodeHarga<?= $m['kode'] ?>"></span>
                           <span class="text-sm text-gray-900 font-normal text-left"><?= nl2br($m['nama']) ?></span>
                             <div id="selectedMetodeIndicator<?= $m['kode'] ?>" class="absolute right-0 bottom-0 px-2 x-bg-g select-check hidden">
@@ -387,7 +388,7 @@
                 <?php foreach ($metode as $m) : ?>
                     <?php if ($m['kategori'] == 'retail'): ?>
                     <div class="overflow-hidden overflow-x-scroll">
-                      <img src="<?= base_url(); ?>public/img/metode/<?= $m['gambar'] ?>" alt="<?= $games['nama'] ?>" class="flex flex-col w-10 h-4" loading="lazy">
+                      <img src="<?= $assetBase; ?>/public/img/metode/<?= $m['gambar'] ?>" alt="<?= $games['nama'] ?>" class="flex flex-col w-10 h-4" loading="lazy">
                     </div>
                     <?php endif; ?>
                 <?php endforeach; ?>
@@ -409,7 +410,7 @@
                     <?php if ($m['kategori'] == 'pulsa'): ?>
                       <div class="pb-2">
                         <button id="metodeBtn<?= $m['kode'] ?>" class="p-3 relative bg-gray-300 border-2 border-transparent gap-2 flex w-full flex-col rounded-lg">
-                          <img src="<?= base_url(); ?>public/img/metode/<?= $m['gambar'] ?>" alt="<?= $games['nama'] ?>" class="flex flex-col w-16 h-7" loading="lazy">
+                          <img src="<?= $assetBase; ?>/public/img/metode/<?= $m['gambar'] ?>" alt="<?= $games['nama'] ?>" class="flex flex-col w-16 h-7" loading="lazy">
                           <span class="text-sm font-bold text-left line-clamp-2 x-color-g" id="selectedMetodeHarga<?= $m['kode'] ?>"></span>
                           <span class="text-sm text-gray-900 font-normal text-left"><?= nl2br($m['nama']) ?></span>
                             <div id="selectedMetodeIndicator<?= $m['kode'] ?>" class="absolute right-0 bottom-0 px-2 x-bg-g select-check hidden">
@@ -426,7 +427,7 @@
                 <?php foreach ($metode as $m) : ?>
                     <?php if ($m['kategori'] == 'pulsa'): ?>
                     <div class="overflow-hidden overflow-x-scroll">
-                      <img src="<?= base_url(); ?>public/img/metode/<?= $m['gambar'] ?>" alt="<?= $games['nama'] ?>" class="flex flex-col w-10 h-4" loading="lazy">
+                      <img src="<?= $assetBase; ?>/public/img/metode/<?= $m['gambar'] ?>" alt="<?= $games['nama'] ?>" class="flex flex-col w-10 h-4" loading="lazy">
                     </div>
                     <?php endif; ?>
                 <?php endforeach; ?>

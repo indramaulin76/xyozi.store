@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="en" class="dark">
   <head>
+    <?php $assetBase = rtrim(str_replace('/index.php', '', base_url()), '/'); ?>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="rgba(30, 32, 34, 1)">
@@ -752,7 +753,7 @@ viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
                       searchResults.hide();
                   } else if (data.results.length > 0) {
                       data.results.forEach(function (result) {
-                          var imagePath = '<?= base_url('public/img/games/') ?>' + result.gambar;
+                          var imagePath = '<?= $assetBase; ?>/public/img/games/' + result.gambar;
                           var url = '<?= base_url('beli/') ?>' + result.slug;
                           var html = '<div class="search-result">';
                           html += '<a href="' + url + '">';
