@@ -141,7 +141,6 @@ $routes->group('sistem', ['namespace' => 'App\Controllers\Sistem', 'filter' => '
     $routes->get('update-statusVip', 'Sistem::updateStatusVip');
     $routes->get('get-produkDf', 'Sistem::getProdukDf');
     $routes->get('update-statusDf', 'Sistem::updateStatusDf');
-    $routes->get('update-statusAg', 'Sistem::updateStatusAg');
     $routes->get('get-produkVcg', 'Sistem::getProdukVcg');
     $routes->get('update-refundOrder', 'Sistem::refundOrder');
     $routes->get('get-produkRG', 'Sistem::getProdukRG');

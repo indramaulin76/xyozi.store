@@ -360,7 +360,7 @@ class Api extends BaseController
             return $this->respond($response);
         } else {
 
-          if (in_array($produk['provider'], ['Vip', 'DF', 'AG', 'Manual'])) {
+          if (in_array($produk['provider'], ['Vip', 'DF', 'Manual'], true)) {
 
             $newBalance = floatval($user['balance']) - floatval($hargaProduk);
             $this->userModel->update($user['id'], ['balance' => $newBalance]);

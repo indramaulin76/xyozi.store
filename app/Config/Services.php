@@ -19,14 +19,21 @@ use CodeIgniter\Config\BaseService;
  */
 class Services extends BaseService
 {
-    /*
-     * public static function example($getShared = true)
-     * {
-     *     if ($getShared) {
-     *         return static::getSharedInstance('example');
-     *     }
-     *
-     *     return new \CodeIgniter\Example();
-     * }
-     */
+    public static function providerGatewayFactory(bool $getShared = true): \App\Services\Providers\ProviderGatewayFactory
+    {
+        if ($getShared) {
+            return static::getSharedInstance('providerGatewayFactory');
+        }
+
+        return new \App\Services\Providers\ProviderGatewayFactory();
+    }
+
+    public static function pricingService(bool $getShared = true): \App\Services\PricingService
+    {
+        if ($getShared) {
+            return static::getSharedInstance('pricingService');
+        }
+
+        return new \App\Services\PricingService();
+    }
 }

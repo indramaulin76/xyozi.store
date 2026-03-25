@@ -726,6 +726,7 @@ class View extends BaseController
         $data = [
             'web' => $web,
             'api' => $api,
+            'systemKey' => trim((string) getenv('internal.systemKey')),
         ];
 
         return view('admin/api', $data);

@@ -11,6 +11,7 @@ use App\Models\GamesModel;
 use App\Models\KontakModel;
 use App\Models\TopupModel;
 use App\Models\ApiProviderModel;
+use App\Models\AdminAuditLogModel;
 use App\Models\BeritaModel;
 use App\Models\MetodePembayaranModel;
 use App\Controllers\BaseController;
@@ -137,6 +138,24 @@ class Update extends BaseController
             return redirect()->to('/');
         }
 
+        $rules = [
+            'nama'           => 'required|max_length[255]',
+            'brand'          => 'required|max_length[120]',
+            'harga_provider' => 'required|decimal|greater_than_equal_to[0]',
+            'harga_jual'     => 'required|decimal|greater_than_equal_to[0]',
+            'harga_basic'    => 'permit_empty|decimal|greater_than_equal_to[0]',
+            'harga_gold'     => 'permit_empty|decimal|greater_than_equal_to[0]',
+            'harga_platinum' => 'permit_empty|decimal|greater_than_equal_to[0]',
+            'kode_produk'    => 'required|max_length[120]',
+            'provider'       => 'required|in_list[Vip,DF,RG,Manual]',
+        ];
+
+        if (! $this->validate($rules)) {
+            return redirect()->to(base_url('admin/produk/edit/' . $id))
+                ->withInput()
+                ->with('errors', $this->validator->getErrors());
+        }
+
         $produkModel = new ProdukModel();
         $produk = $produkModel->find($id);
     
@@ -179,6 +198,25 @@ class Update extends BaseController
             ];
     
             $produkModel->update($id, $dataUpdate);
+
+            try {
+                (new AdminAuditLogModel())->insert([
+                    'admin_username' => (string) $this->session->get('username'),
+                    'action'         => 'produk.update',
+                    'entity'         => 'produk',
+                    'entity_id'      => (string) $id,
+                    'details'        => json_encode([
+                        'kode_produk'    => $dataUpdate['kode_produk'],
+                        'provider'       => $dataUpdate['provider'],
+                        'harga_jual'     => $dataUpdate['harga_jual'],
+                        'harga_provider' => $dataUpdate['harga_provider'],
+                    ], JSON_UNESCAPED_UNICODE),
+                    'ip_address' => $this->request->getIPAddress(),
+                ]);
+            } catch (\Throwable $e) {
+                log_message('error', 'Audit log (produk): ' . $e->getMessage());
+            }
+
             session()->setFlashdata('success', 'Produk berhasil diupdate');
         } else {
             session()->setFlashdata('error', 'Produk tidak ditemukan');
@@ -306,21 +344,57 @@ class Update extends BaseController
             return redirect()->to('/');
         }
 
+        $rules = [
+            'api_id'          => 'permit_empty|max_length[255]',
+            'api_key'         => 'permit_empty|max_length[512]',
+            'private_key'     => 'permit_empty|max_length[512]',
+            'profit'          => 'permit_empty|decimal|greater_than_equal_to[0]',
+            'profit_basic'    => 'permit_empty|decimal|greater_than_equal_to[0]',
+            'profit_gold'     => 'permit_empty|decimal|greater_than_equal_to[0]',
+            'profit_platinum' => 'permit_empty|decimal|greater_than_equal_to[0]',
+        ];
+
+        if (! $this->validate($rules)) {
+            return redirect()->to(base_url('admin/api-provider'))
+                ->withInput()
+                ->with('errors', $this->validator->getErrors());
+        }
+
         $apiProviderModel = new ApiProviderModel();
         $apiProvider = $apiProviderModel->find($id);
     
         if ($apiProvider) {
             $dataUpdate = [
-                'api_id' => $this->request->getPost('api_id'),
-                'api_key' => $this->request->getPost('api_key'),
-                'private_key' => $this->request->getPost('private_key'),
-                'profit' => $this->request->getPost('profit'),
-                'profit_basic' => $this->request->getPost('profit_basic'),
-                'profit_gold' => $this->request->getPost('profit_gold'),
-                'profit_platinum' => $this->request->getPost('profit_platinum'),
+                'api_id'          => (string) $this->request->getPost('api_id'),
+                'api_key'         => (string) $this->request->getPost('api_key'),
+                'private_key'     => (string) $this->request->getPost('private_key'),
+                'profit'          => (string) $this->request->getPost('profit'),
+                'profit_basic'    => (string) $this->request->getPost('profit_basic'),
+                'profit_gold'     => (string) $this->request->getPost('profit_gold'),
+                'profit_platinum' => (string) $this->request->getPost('profit_platinum'),
             ];
     
             $apiProviderModel->update($id, $dataUpdate);
+
+            try {
+                (new AdminAuditLogModel())->insert([
+                    'admin_username' => (string) $this->session->get('username'),
+                    'action'         => 'api_provider.update',
+                    'entity'         => 'api_provider',
+                    'entity_id'      => (string) $id,
+                    'details'        => json_encode([
+                        'kode'            => $apiProvider['kode'] ?? null,
+                        'provider'        => $apiProvider['provider'] ?? null,
+                        'api_id'          => $dataUpdate['api_id'],
+                        'keys_redacted'   => 'api_key/private_key disimpan (nilai tidak di-log)',
+                        'profit'          => $dataUpdate['profit'],
+                    ], JSON_UNESCAPED_UNICODE),
+                    'ip_address' => $this->request->getIPAddress(),
+                ]);
+            } catch (\Throwable $e) {
+                log_message('error', 'Audit log (api_provider): ' . $e->getMessage());
+            }
+
             session()->setFlashdata('success', 'Api provider berhasil diupdate');
         } else {
             session()->setFlashdata('error', 'Api provider tidak ditemukan');
@@ -497,29 +571,11 @@ class Update extends BaseController
     
     private function sendUserWhatsappMessage($whatsapp, $whatsappMessage)
     {
-        $apiProviderModel = new ApiProviderModel();
-        $api = $apiProviderModel->where('kode', 'Ft')->first();
-        
-        $curl = curl_init();
-    
-        $data = array(
-            'target' => $whatsapp,
-            'message' => $whatsappMessage,
-        );
-    
-        curl_setopt_array($curl, array(
-            CURLOPT_URL => 'https://api.fonnte.com/send',
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_POST => true,
-            CURLOPT_POSTFIELDS => $data,
-            CURLOPT_HTTPHEADER => array('Authorization: ' . $api['api_key']),
-        ));
-        
-        $response = curl_exec($curl);
-        
-        curl_close($curl);
-        
-        return $response;
+        try {
+            \Config\Services::providerGatewayFactory()->fonnte()->sendMessage($whatsapp, $whatsappMessage);
+        } catch (\Throwable $e) {
+            log_message('error', 'Fonnte admin notify: ' . $e->getMessage());
+        }
     }
     
 }

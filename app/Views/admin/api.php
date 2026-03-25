@@ -93,11 +93,11 @@
         								<div class="flex">
         									<button type="button" class="focus:outline-none text-white bg-yellow-400 hover:bg-yellow-500 font-medium rounded-lg text-sm px-3 py-1 me-2" data-modal-target="edit-modal<?= $a['id'] ?>" data-modal-toggle="edit-modal<?= $a['id'] ?>">Edit</button>
         									<?php if ($a['kode'] == 'Vip') : ?>
-        									<a href="<?= base_url('sistem/get-produkVip'); ?>"><button type="button" class="focus:outline-none text-white bg-green-400 hover:bg-green-500 font-medium rounded-lg text-sm px-3 py-1 me-2">Get Produk</button></a>
+        									<a href="<?= base_url('sistem/get-produkVip'); ?>?key=<?= urlencode($systemKey) ?>"><button type="button" class="focus:outline-none text-white bg-green-400 hover:bg-green-500 font-medium rounded-lg text-sm px-3 py-1 me-2">Get Produk</button></a>
         									<?php elseif ($a['kode'] == 'DF') : ?>
-        									<a href="<?= base_url('sistem/get-produkDf'); ?>"><button type="button" class="focus:outline-none text-white bg-green-400 hover:bg-green-500 font-medium rounded-lg text-sm px-3 py-1 me-2">Get Produk</button></a>
+        									<a href="<?= base_url('sistem/get-produkDf'); ?>?key=<?= urlencode($systemKey) ?>"><button type="button" class="focus:outline-none text-white bg-green-400 hover:bg-green-500 font-medium rounded-lg text-sm px-3 py-1 me-2">Get Produk</button></a>
         									<?php elseif ($a['kode'] == 'RG') : ?>
-        									<a href="<?= base_url('sistem/get-produkRG'); ?>"><button type="button" class="focus:outline-none text-white bg-green-400 hover:bg-green-500 font-medium rounded-lg text-sm px-3 py-1 me-2">Get Produk</button></a>
+        									<a href="<?= base_url('sistem/get-produkRG'); ?>?key=<?= urlencode($systemKey) ?>"><button type="button" class="focus:outline-none text-white bg-green-400 hover:bg-green-500 font-medium rounded-lg text-sm px-3 py-1 me-2">Get Produk</button></a>
         									<?php else : ?><?php endif; ?>
         								</div>		
         							</td>

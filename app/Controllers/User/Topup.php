@@ -8,6 +8,7 @@ use App\Models\MetodePembayaranModel;
 use App\Models\ApiProviderModel;
 use App\Controllers\BaseController;
 use CodeIgniter\Exceptions\PageNotFoundException;
+use Config\Services;
 
 class Topup extends BaseController
 {
@@ -59,71 +60,46 @@ class Topup extends BaseController
         $settings = $this->getSettingsData();
         
         $apiProviderModel = new ApiProviderModel();
-        $api = $apiProviderModel->where('kode', 'Sp')->first();
-        
-        $api_id = $api['api_id']; 
-        $data_method =$metodeCode; 
-        $merchant_ref = $topupID; 
-        $amount = $nominal;
-        $apikey = $api['api_key'];
-        $URL_config = $api['private_key'];
-        
-        $signature = hash_hmac('sha256', $api_id.$data_method.$merchant_ref.$amount,$apikey);
-        
-        
+        $api              = $apiProviderModel->where('kode', 'Sp')->first();
 
+        try {
+            $spGw = Services::providerGatewayFactory()->sakurupiah();
+        } catch (\Throwable $e) {
+            return $this->response->setJSON(['success' => false, 'message' => 'Gateway pembayaran belum dikonfigurasi.']);
+        }
 
-        $dataPOST = array(
-            'api_id' => $api_id,
-            'method' => $data_method,
-            'phone' => !empty($whatsapp) ? $whatsapp : $user['whatsapp'],
-            'amount' => $amount,
+        $api_id       = $api['api_id'];
+        $data_method  = $metodeCode;
+        $merchant_ref = $topupID;
+        $amount       = $nominal;
+        $URL_config   = rtrim((string) $api['private_key'], '/');
+
+        $signature = $spGw->buildCreateSignature((string) $api_id, (string) $data_method, (string) $merchant_ref, $amount);
+
+        $dataPOST = [
+            'api_id'       => $api_id,
+            'method'       => $data_method,
+            'phone'        => ! empty($whatsapp) ? $whatsapp : $user['whatsapp'],
+            'amount'       => $amount,
             'merchant_fee' => '2',
             'merchant_ref' => $merchant_ref,
-            'expired' => '1',
-            'produk' => array('TOPUP SALDO'),
-            'qty' => array('-'),
-            'harga' => array($amount),
-            'size' => array('-'),
-            'note' => array('Username : '.$user['username'].''),
-            'callback_url' => ''.$URL_config.'/callback',                      
-            'return_url' => ''.$URL_config.'/dashboard/topup/invoice/'.$merchant_ref.'',
-            'signature' => $signature
-        );
-        
-        
-        $curl = curl_init();
-        
-        curl_setopt_array($curl, array(
-          CURLOPT_URL => 'https://sakurupiah.id/api/create.php',
-          CURLOPT_RETURNTRANSFER => true,
-          CURLOPT_ENCODING => '',
-          CURLOPT_MAXREDIRS => 10,
-          CURLOPT_TIMEOUT => 0,
-          CURLOPT_FOLLOWLOCATION => true,
-          CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-          CURLOPT_CUSTOMREQUEST => 'POST',
-          CURLOPT_POSTFIELDS => http_build_query($dataPOST),
-          CURLOPT_HTTPHEADER => array(
-            'Authorization: Bearer '.$apikey
-          ),
-        ));
-        
-        $response = curl_exec($curl);
-    
-        if (curl_errno($curl)) {
-            echo 'Error:' . curl_error($curl);
+            'expired'      => '1',
+            'produk'       => ['TOPUP SALDO'],
+            'qty'          => ['-'],
+            'harga'        => [$amount],
+            'size'         => ['-'],
+            'note'         => ['Username : ' . $user['username']],
+            'callback_url' => $URL_config . '/callback',
+            'return_url'   => $URL_config . '/dashboard/topup/invoice/' . $merchant_ref,
+            'signature'    => $signature,
+        ];
+
+        $responseData = $spGw->createTransaction($dataPOST);
+
+        if ($responseData === null) {
+            return $this->response->setJSON(['success' => false, 'message' => 'Gagal menghubungi gateway pembayaran.']);
         }
-    
-        curl_close($curl);
-    
-        $responseData = json_decode($response, true);
-        if (json_last_error() !== JSON_ERROR_NONE) {
-            log_message('error', 'JSON decode error: '.json_last_error_msg());
-            log_message('error', 'Raw response: '.$response);
-            return $this->response->setJSON(['success'=>false,'message'=>'Format JSON API tidak valid']);
-        }
-        
+
         $status = (int) ($responseData['status'] ?? 0);
         if ($status === 400) {
             return $this->response->setJSON([

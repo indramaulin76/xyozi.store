@@ -226,6 +226,19 @@ class Tambah extends BaseController
         }
 
         if ($this->request->getMethod() === 'post') {
+            $rules = [
+                'nama'           => 'required|max_length[255]',
+                'brand'          => 'required|max_length[120]',
+                'harga_provider' => 'required|decimal|greater_than_equal_to[0]',
+                'harga_jual'     => 'required|decimal|greater_than_equal_to[0]',
+                'kode_produk'    => 'required|max_length[120]',
+                'provider'       => 'required|in_list[Vip,DF,RG,Manual]',
+            ];
+
+            if (! $this->validate($rules)) {
+                return redirect()->to('admin/produk')->withInput()->with('errors', $this->validator->getErrors());
+            }
+
             $produkModel = new ProdukModel();
             
             $logo = $this->request->getFile('logo');

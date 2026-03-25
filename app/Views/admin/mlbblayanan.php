@@ -184,7 +184,6 @@
                     <select class="custom-input block w-full" name="provider" required>
                       <option value="Vip">Vip Reseller</option>
                       <option value="DF">DigiFlazz</option>
-                      <option value="AG">Api Games</option>
                       <option value="Manual">Manual</option>
                     </select>
                   </div>

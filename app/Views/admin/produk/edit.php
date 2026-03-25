@@ -55,7 +55,6 @@
                   <select class="custom-input block w-full" name="provider" required>
                               <option value="Vip" <?= ($produk['provider'] == 'Vip') ? 'selected' : '' ?>>Vip Reseller</option>
                               <option value="DF" <?= ($produk['provider'] == 'DF') ? 'selected' : '' ?>>DigiFlazz</option>
-                              <option value="AG" <?= ($produk['provider'] == 'AG') ? 'selected' : '' ?>>Api Games</option>
                               <option value="Manual" <?= ($produk['provider'] == 'Manual') ? 'selected' : '' ?>>Manual</option>
                   </select>
               </div>

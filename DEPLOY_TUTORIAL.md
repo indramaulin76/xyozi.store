@@ -27,6 +27,13 @@ Panduan ini untuk deploy project `TOPUP-GAMES-PG-SAKURUPIAH+DB` ke server produc
 3. Grant privilege hanya ke DB app
 4. Import SQL awal:
    - file: `DATABASENYA.sql`
+5. Jalankan migrasi framework (tabel audit + index tambahan):
+
+```bash
+php spark migrate --all
+```
+
+Setelah deploy pembaruan refactor provider, migrasi di atas menambahkan tabel `admin_audit_log` dan index pada `produk.kode_produk`, `produk.brand`, `pembelian.order_id`, `pembelian.status_pembelian`.
 
 Contoh SQL:
 
